@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="/edit/<%=show._id%>" method="post">
+        <input type="text" placeholder="enter the name" name="name" value="<%=show.name %>">
+        <input type="text" placeholder="enter the username" name="username" value="<%=show.username %>">
+        <input type="text" placeholder="enter the email" name="email" value="<%=show.email %>">
+        <button>submit</button>
+    </form>
+</body>
+</html>

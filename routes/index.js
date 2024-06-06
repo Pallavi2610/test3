@@ -45,7 +45,7 @@ function isLoggedIn (req,res,next){
 
 
 router.get("/profile", isLoggedIn,(req,res,next)=>{
-  res.render("profile");
+  res.render("profile",{user:req.user});
 })
 
 
@@ -68,5 +68,29 @@ router.post("/update-password", isLoggedIn,async (req,res,next)=>{
   await user.setPassword(password)
   await user.save()
   res.redirect("/login")
+})
+
+
+router.get("/edit/:id", async(req,res,next)=>{
+  const show =  await User.findOne({_id:req.params.id})
+  res.render("edit",{show});
+})
+
+
+router.post("/edit/:id",async(req,res,next)=>{
+  await User.findOneAndUpdate({_id:req.params.id},{
+     name:req.body.name,
+     username:req.body.username,
+     email:req.body.email,
+  })
+res.redirect("/profile")
+})
+
+
+router.get("/delete-user/:id",async(req,res,next)=>{
+   const id=req.params.id
+   await User.findOneAndDelete({_id:id})
+   res.redirect("/register")
+
 })
 module.exports = router;
